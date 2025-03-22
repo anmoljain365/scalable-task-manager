@@ -1,0 +1,9 @@
+node_modules
+.env
+dist
+*.log
+coverage
+.prisma/client
+.turbo
+.DS_Store
+*package-lock.json
