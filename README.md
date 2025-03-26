@@ -18,3 +18,12 @@ npx prisma db push
 
 ## Reseting prisma
 npx prisma migrate reset
+
+# Restting everything and clearning cache
+rm -rf node_modules
+rm -rf apps/*/node_modules
+rm -rf apps/*/prisma/migrations
+rm -rf apps/*/.prisma
+rm -rf .turbo
+rm -rf package-lock.json
+npm install
