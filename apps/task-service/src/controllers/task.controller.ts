@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { prisma } from '../prisma';
 import { redisClient } from '../redis';
+import { getChannel } from '../rabbitmq';
 
 // 🧾 GET /task - Get all tasks for the logged-in user
 // Using redis for faster reads
@@ -12,7 +13,8 @@ export const getTasks = async (req: Request, res: Response) => {
     // Try Redis first
     const cached = await redisClient.get(cacheKey);
     if (cached) {
-      return res.json(JSON.parse(cached));
+      res.json(JSON.parse(cached));
+      return;
     }
 
     // Fallback to DB
@@ -51,6 +53,17 @@ export const createTask = async (req: Request, res: Response) => {
 
     // Deleting cache for that user once new tasks are created
     await redisClient.del(`tasks:user:${user.userId}`);
+
+    // Sending task create notification to notification-service
+
+    // Channel to notification service
+    const channel = getChannel();
+    channel.assertQueue('task_created');
+    channel.sendToQueue('task_created', Buffer.from(JSON.stringify({
+      title,
+      description,
+      userId: user.userId
+    })));
 
     res.status(201).json(task);
   } catch (error) {
