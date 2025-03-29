@@ -3,10 +3,12 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import taskRoutes from './routes/task.routes';
-import path from 'path';
+import path from 'path';import { redisClient } from './redis';
 
 dotenv.config();
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+redisClient.connect();
 
 const app = express();
 app.use(cors());

@@ -27,3 +27,10 @@ rm -rf apps/*/.prisma
 rm -rf .turbo
 rm -rf package-lock.json
 npm install
+
+# Redis cache
+## Flushing/Resetting 
+redis-cli FLUSHALL
+
+## Getting all keys
+redis-cli keys *
