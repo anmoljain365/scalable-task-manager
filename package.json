@@ -18,7 +18,9 @@
   },
   "packageManager": "npm@10.7.0",
   "workspaces": [
-    "apps/*",
+    "apps/user-service",
+    "apps/task-service",
+    "apps/notification-service",
     "packages/*"
   ]
 }
