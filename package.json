@@ -21,6 +21,7 @@
     "apps/user-service",
     "apps/task-service",
     "apps/notification-service",
+    "apps/api-gateway",
     "packages/*"
   ]
 }

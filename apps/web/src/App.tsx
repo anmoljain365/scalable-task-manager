@@ -1,7 +1,20 @@
-export default function App() {
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './auth/Login';
+import Register from './auth/Register';
+import { Toaster } from 'react-hot-toast';
+
+function App() {
   return (
-    <div className="text-3xl font-bold text-blue-500 p-8">
-      Tailwind is working! 🎉
-    </div>
+    <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* Add more routes later */}
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;
