@@ -56,7 +56,6 @@ export const createTask = async (req: Request, res: Response) => {
     await redisClient.del(`tasks:user:${user.userId}`);
 
     // Sending task create notification to notification-service
-
     // Channel to notification service
     const channel = getChannel();
     channel.assertQueue('task_created');
@@ -70,6 +69,42 @@ export const createTask = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create task' });
+  }
+};
+
+// ➕ PUT /task - Update a task assigned to self or someone else
+// Delete cache once new tasks are created
+export const updateTask = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { title, description } = req.body;
+
+  try {
+    const task = await prisma.task.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        updatedAt: new Date(), // optional, Prisma handles this if you use @updatedAt
+      },
+    });
+
+    // Deleting cache for that user once new tasks are created
+    await redisClient.del(`tasks:user:${id}`);
+
+    // Sending task create notification to notification-service
+    // Channel to notification service
+    const channel = getChannel();
+    channel.assertQueue('task_created');
+    channel.sendToQueue('task_created', Buffer.from(JSON.stringify({
+      title,
+      description,
+      userId: id
+    })));
+
+    res.status(200).json(task);
+  } catch (err) {
+    console.error('Error updating task:', err);
+    res.status(500).json({ error: 'Failed to update task' });
   }
 };
 

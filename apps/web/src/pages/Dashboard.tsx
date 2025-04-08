@@ -75,8 +75,13 @@ const Dashboard = () => {
             ) : (
                 <div className="flex-1 overflow-y-scroll space-y-4 pr-2">
                     {tasks.map(task => (
-                        <div key={task.id} className="bg-white shadow p-4 rounded">
-                            <h3 className="text-lg font-semibold text-gray-700">{task.title}</h3>
+                        <div key={task.id} className="bg-white shadow p-4 rounded relative">
+                            <button
+                                className="absolute top-4 right-4 text-sm text-blue-600 hover:underline bg-white"
+                                onClick={() => setEditingTask(task)}
+                            >Edit
+                            </button>
+                            <h3 className="text-lg font-semibold text-gray-700 pr-10">{task.title}</h3>
                             <p className="text-sm text-gray-600">{task.description}</p>
                             <p className="text-xs mt-1 text-gray-500">Status: {task.status}</p>
                         </div>
@@ -93,6 +98,19 @@ const Dashboard = () => {
                                 setShowAddModal(false);
                             }}
                             onCancel={() => setShowAddModal(false)}
+                        />
+                    </div>
+                </div>
+            )}
+            {editingTask && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                        <h2 className="text-xl font-semibold mb-4">Edit Task</h2>
+                        <TaskForm
+                            initialData={editingTask}
+                            taskId={editingTask?.id}
+                            onSubmit={(data) => handleUpdate(data)}
+                            onCancel={() => setEditingTask(null)}
                         />
                     </div>
                 </div>

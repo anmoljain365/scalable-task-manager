@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 interface TaskFormProps {
   onSubmit: (task: { title: string; description: string }) => void;
   initialData?: { title: string; description: string };
+  taskId?: string;
   onCancel?: () => void;
 }
 
