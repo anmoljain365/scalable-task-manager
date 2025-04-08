@@ -22,6 +22,7 @@ export const getTasks = async (req: Request, res: Response) => {
       where: {
         assignedTo: user.userId,
       },
+      orderBy: { updatedAt: 'desc' },
     });
 
     // Save to Redis (TTL: 60s)
