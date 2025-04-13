@@ -34,3 +34,10 @@ redis-cli FLUSHALL
 
 ## Getting all keys
 redis-cli keys *
+
+# Docker
+## Build image
+docker build -t task-service .   
+
+## Run image
+docker run -p 4002:4002 --env-file .env task-service

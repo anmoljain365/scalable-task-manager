@@ -45,7 +45,7 @@ async function startServer() {
         });
 
         // Start the server only after both are ready
-        app.listen(PORT, () => console.log(`🚀 Task Service running on port ${PORT}`));
+        app.listen(PORT, () => console.log(`🚀 Notification Service running on port ${PORT}`));
     } catch (err) {
         console.error('❌ Error during startup:', err);
         process.exit(1);
