@@ -34,7 +34,7 @@ A Trello-like task management platform designed to demonstrate **system design**
         ┌───────────────▼┐  ┌▼─────────────┐
         │ user-service   │  │ task-service │
         └─────┬──────────┘  └─────┬────────┘
-              │                  │
+              │                   │
          ┌────▼─────┐        ┌────▼─────┐
          │PostgreSQL│        │ Redis    │
          └──────────┘        └──────────┘
@@ -47,6 +47,7 @@ A Trello-like task management platform designed to demonstrate **system design**
                             │  MongoDB    │
                             └─────────────┘
 
+```
 
 ### Running services
 All services: npm run dev
