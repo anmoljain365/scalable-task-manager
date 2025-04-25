@@ -41,3 +41,10 @@ docker build -t task-service .
 
 ## Run image
 docker run -p 4002:4002 --env-file .env task-service
+
+## Docker compose
+docker-compose build: Build all images
+docker-compose up: Start all services with logs
+docker-compose up --build: Build + start (recommended)
+docker-compose up -d: Start in background (detached)
+docker-compose down: Stop and clean up all services

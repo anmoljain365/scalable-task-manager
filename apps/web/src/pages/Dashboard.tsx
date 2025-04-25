@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -18,7 +19,7 @@ const Dashboard = () => {
     const fetchTasks = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`${import.meta.env.VITE_TASK_SERVICE_URL}/task`, {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/task`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(res.data);
@@ -30,7 +31,7 @@ const Dashboard = () => {
     const handleAdd = async (data: { title: string; description: string }) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`${import.meta.env.VITE_TASK_SERVICE_URL}/task`, data, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/task`, data, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             toast.success('✅ Task added');
@@ -43,7 +44,7 @@ const Dashboard = () => {
     const handleUpdate = async (data: { title: string; description: string }) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`${import.meta.env.VITE_TASK_SERVICE_URL}/task/${editingTask?.id}`, data, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/task/${editingTask?.id}`, data, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             toast.success('✏️ Task updated');

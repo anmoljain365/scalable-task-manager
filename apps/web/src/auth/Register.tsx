@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,7 +14,7 @@ const Register = () => {
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_USER_SERVICE_URL}/auth/register`, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/user/auth/register`, {
                 name,
                 email,
                 password,
