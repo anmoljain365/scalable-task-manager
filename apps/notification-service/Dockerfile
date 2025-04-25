@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 4003
 
 # Run the service using ts-node-dev
-CMD ["npx", "ts-node-dev", "--respawn", "src/server.ts"]
+CMD ["sh", "./docker-entrypoint.sh"]
