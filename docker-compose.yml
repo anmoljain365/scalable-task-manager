@@ -11,6 +11,7 @@ services:
       POSTGRES_DB: userdb
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
 
   redis:
     image: redis:7
@@ -37,7 +38,7 @@ services:
       - "4001:4001"
     environment:
       PORT: 4001
-      JWT_SECRET: your-secret
+      JWT_SECRET: hello-world
       DATABASE_URL: postgres://anmol:luffyandkat@postgres:5432/userdb
       REDIS_URL: redis://redis:6379
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
@@ -53,6 +54,7 @@ services:
       - "4002:4002"
     environment:
       PORT: 4002
+      JWT_SECRET: hello-world
       DATABASE_URL: postgres://anmol:luffyandkat@postgres:5432/taskdb
       REDIS_URL: redis://redis:6379
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
