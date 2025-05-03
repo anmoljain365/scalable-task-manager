@@ -80,7 +80,7 @@ A Trello-like task management platform designed to demonstrate **system design**
 - npm install
 
 ### Redis cache
-## Flushing/Resetting 
+#### Flushing/Resetting 
 - redis-cli FLUSHALL
 
 #### Getting all keys
